@@ -1,3 +1,7 @@
+// ================================
+// CARE FLOWERS - PREMIUM JS
+// Luxury E-Commerce Experience
+// ================================
 
 const CONFIG = {
     whatsappNumber: '250785137381',
