@@ -10,8 +10,8 @@ const CONFIG = {
     collection: [
         {
             name: 'Classic Rose Collection',
-            price: '17000',
-            oldPrice: '25000',
+            price: '35,000',
+            oldPrice: '50,000',
             description: 'Hand-selected premium roses arranged in our signature style. Perfect for expressing love and admiration.',
             image: 'images/flower/1 (1).jpeg',
             tag: '30% OFF',
@@ -19,8 +19,8 @@ const CONFIG = {
         },
         {
             name: 'Spring Garden',
-            price: '25000',
-            oldPrice: '35,000',
+            price: '42,000',
+            oldPrice: '65,000',
             description: 'A vibrant celebration of seasonal blooms featuring tulips, peonies, and garden roses.',
             image: 'images/flower/1 (3).jpeg',
             tag: '35% OFF',
@@ -28,8 +28,8 @@ const CONFIG = {
         },
         {
             name: 'Elegant Lily',
-            price: '25,000',
-            oldPrice: '30000',
+            price: '38,000',
+            oldPrice: '58,000',
             description: 'Pure white lilies arranged with eucalyptus and delicate greenery. Timeless sophistication.',
             image: 'images/flower/1 (14).jpeg',
             tag: 'BESTSELLER',
@@ -37,8 +37,8 @@ const CONFIG = {
         },
         {
             name: 'Sunlit Meadow',
-            price: '15000',
-            oldPrice: '25000',
+            price: '28,000',
+            oldPrice: '42,000',
             description: 'Cheerful sunflowers paired with wildflowers. Brings warmth to any space.',
             image: 'images/flower/2 (8).jpeg',
             tag: 'NEW',
@@ -46,8 +46,8 @@ const CONFIG = {
         },
         {
             name: 'Bridal Couture',
-            price: '15,000',
-            oldPrice: '25,000',
+            price: '95,000',
+            oldPrice: '145,000',
             description: 'Our most luxurious arrangement. Orchids, peonies, and premium roses in an exquisite design.',
             image: 'images/flower/2 (5).jpeg',
             tag: 'SIGNATURE',
@@ -55,8 +55,8 @@ const CONFIG = {
         },
         {
             name: 'Executive Suite',
-            price: '10,000',
-            oldPrice: '25,000',
+            price: '65,000',
+            oldPrice: '95,000',
             description: 'Sophisticated arrangement designed for corporate environments. Makes a lasting impression.',
             image: 'images/flower/1 (7).jpeg',
             tag: 'CORPORATE',
@@ -76,6 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('🌸 Care Flowers initialized');
 });
 
+// === LOYALTY CODE GENERATOR ===
+function generateLoyaltyCode() {
+    const prefix = 'CF';
+    const number = Math.floor(1000 + Math.random() * 9000);
+    return `${prefix}-${number}`;
+}
+
 // === COLLECTION RENDERING ===
 function initCollection() {
     const grid = document.getElementById('collectionGrid');
@@ -87,6 +94,9 @@ function initCollection() {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         
+        // Get urgency message (rotates per product)
+        const urgency = CONFIG.urgencyMessages[index % CONFIG.urgencyMessages.length];
+        
         card.innerHTML = `
             <div class="collection-image">
                 <img src="${item.image}" 
@@ -94,6 +104,7 @@ function initCollection() {
                      loading="lazy"
                      onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22%3E%3Crect fill=%22%23F5F5F4%22 width=%22400%22 height=%22500%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22%2378716C%22 font-family=%22system-ui%22%3EImage Coming Soon%3C/text%3E%3C/svg%3E'">
                 <span class="collection-tag">${item.tag}</span>
+                <span class="collection-urgency">${urgency}</span>
             </div>
             <div class="collection-info">
                 <h3 class="collection-name">${item.name}</h3>
@@ -141,11 +152,36 @@ Please let me know what's possible. Thank you!`;
     trackEvent('whatsapp_click', type);
 }
 
+// === ORDER ITEM WITH PRE-QUALIFICATION ===
 function orderItem(index) {
     const item = CONFIG.collection[index];
     if (!item) return;
     
-    const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(item.message)}`;
+    // Generate unique loyalty code for this customer
+    const loyaltyCode = generateLoyaltyCode();
+    
+    // Structured WhatsApp message (pre-qualification)
+    const message = `Hello Care Flowers,
+
+I would like to order:
+━━━━━━━━━━━━━━━━
+• Bouquet: ${item.name}
+• Price: ${item.price} RWF
+━━━━━━━━━━━━━━━━
+
+Delivery Information:
+• Location: 
+• Preferred time: 
+• Recipient name: 
+• Special message card: 
+
+━━━━━━━━━━━━━━━━
+Your loyalty code: ${loyaltyCode}
+(Keep this for future discounts)
+
+Thank you!`;
+    
+    const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
     
     trackEvent('order_click', item.name);
