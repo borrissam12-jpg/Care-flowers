@@ -10,8 +10,8 @@ const CONFIG = {
     collection: [
         {
             name: 'Classic Rose Collection',
-            price: '35,000',
-            oldPrice: '50,000',
+            price: '17000',
+            oldPrice: '25000',
             description: 'Hand-selected premium roses arranged in our signature style. Perfect for expressing love and admiration.',
             image: 'images/flower/1 (1).jpeg',
             tag: '30% OFF',
@@ -19,8 +19,8 @@ const CONFIG = {
         },
         {
             name: 'Spring Garden',
-            price: '42,000',
-            oldPrice: '65,000',
+            price: '25000',
+            oldPrice: '35,000',
             description: 'A vibrant celebration of seasonal blooms featuring tulips, peonies, and garden roses.',
             image: 'images/flower/1 (3).jpeg',
             tag: '35% OFF',
@@ -28,8 +28,8 @@ const CONFIG = {
         },
         {
             name: 'Elegant Lily',
-            price: '38,000',
-            oldPrice: '58,000',
+            price: '25,000',
+            oldPrice: '30000',
             description: 'Pure white lilies arranged with eucalyptus and delicate greenery. Timeless sophistication.',
             image: 'images/flower/1 (14).jpeg',
             tag: 'BESTSELLER',
@@ -37,8 +37,8 @@ const CONFIG = {
         },
         {
             name: 'Sunlit Meadow',
-            price: '28,000',
-            oldPrice: '42,000',
+            price: '15000',
+            oldPrice: '25000',
             description: 'Cheerful sunflowers paired with wildflowers. Brings warmth to any space.',
             image: 'images/flower/2 (8).jpeg',
             tag: 'NEW',
@@ -46,8 +46,8 @@ const CONFIG = {
         },
         {
             name: 'Bridal Couture',
-            price: '95,000',
-            oldPrice: '145,000',
+            price: '15,000',
+            oldPrice: '25,000',
             description: 'Our most luxurious arrangement. Orchids, peonies, and premium roses in an exquisite design.',
             image: 'images/flower/2 (5).jpeg',
             tag: 'SIGNATURE',
@@ -55,8 +55,8 @@ const CONFIG = {
         },
         {
             name: 'Executive Suite',
-            price: '65,000',
-            oldPrice: '95,000',
+            price: '10,000',
+            oldPrice: '25,000',
             description: 'Sophisticated arrangement designed for corporate environments. Makes a lasting impression.',
             image: 'images/flower/1 (7).jpeg',
             tag: 'CORPORATE',
