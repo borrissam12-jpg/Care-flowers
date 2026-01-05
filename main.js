@@ -1,69 +1,121 @@
 // ================================
-// KIGALI FLOWERS - MAIN JAVASCRIPT
-// Zero-dependency, conversion-optimized
+// CARE FLOWERS - PREMIUM JS
+// Luxury E-Commerce Experience
 // ================================
 
-// === CONFIGURATION ===
 const CONFIG = {
-    // IMPORTANT: Replace with your actual WhatsApp number (include country code, no + or spaces)
-    // Example: for Rwanda (+250) 788123456, use: 250788123456
-    whatsappNumber: '250785137381', // CHANGE THIS!
+    whatsappNumber: '250785137381',
+    whatsappMessage: 'Hello! I would like to inquire about your artisanal floral arrangements.',
     
-    // Default WhatsApp message
-    whatsappMessage: 'Hello! I would like to order flowers from Care Flowers. 🌸',
-    
-    // Gallery items (EASY TO UPDATE - just add/remove items here)
-    galleryItems: [
+    collection: [
         {
-            name: 'Red Rose Bouquet',
-            price: '15,000 RWF',
-            oldPrice: '25,000 RWF',
-            description: 'Classic red roses - Perfect for romance',
+            name: 'Classic Rose Collection',
+            price: '35,000',
+            oldPrice: '50,000',
+            description: 'Hand-selected premium roses arranged in our signature style. Perfect for expressing love and admiration.',
             image: 'images/flower/1 (1).jpeg',
-            whatsappMsg: 'I would like to order the Red Rose Bouquet (15,000 RWF)'
+            tag: '30% OFF',
+            message: 'I would like to order the Classic Rose Collection (35,000 RWF)'
         },
         {
-            name: 'Mixed Spring Flowers',
-            price: '20,000 RWF',
-            oldPrice: '35,000 RWF',
-            description: 'Vibrant mixed arrangement for any occasion',
+            name: 'Spring Garden',
+            price: '42,000',
+            oldPrice: '65,000',
+            description: 'A vibrant celebration of seasonal blooms featuring tulips, peonies, and garden roses.',
             image: 'images/flower/1 (3).jpeg',
-            whatsappMsg: 'I would like to order Mixed Spring Flowers (20,000 RWF)'
+            tag: '35% OFF',
+            message: 'I would like to order Spring Garden (42,000 RWF)'
         },
         {
-            name: 'White Lily Elegance',
-            price: '18,000 RWF',
-            oldPrice: '30,000 RWF',
-            description: 'Elegant white lilies for special moments',
+            name: 'Elegant Lily',
+            price: '38,000',
+            oldPrice: '58,000',
+            description: 'Pure white lilies arranged with eucalyptus and delicate greenery. Timeless sophistication.',
             image: 'images/flower/1 (14).jpeg',
-            whatsappMsg: 'I would like to order White Lily Elegance (18,000 RWF)'
+            tag: 'BESTSELLER',
+            message: 'I would like to order Elegant Lily (38,000 RWF)'
         },
         {
-            name: 'Sunflower Delight',
-            price: '12,000 RWF',
-            oldPrice: '20,000 RWF',
-            description: 'Bright sunflowers to bring joy',
+            name: 'Sunlit Meadow',
+            price: '28,000',
+            oldPrice: '42,000',
+            description: 'Cheerful sunflowers paired with wildflowers. Brings warmth to any space.',
             image: 'images/flower/2 (8).jpeg',
-            whatsappMsg: 'I would like to order Sunflower Delight (12,000 RWF)'
+            tag: 'NEW',
+            message: 'I would like to order Sunlit Meadow (28,000 RWF)'
         },
         {
-            name: 'Premium Wedding Bouquet',
-            price: '45,000 RWF',
-            oldPrice: '75,000 RWF',
-            description: 'Luxurious arrangement for your special day',
+            name: 'Bridal Couture',
+            price: '95,000',
+            oldPrice: '145,000',
+            description: 'Our most luxurious arrangement. Orchids, peonies, and premium roses in an exquisite design.',
             image: 'images/flower/2 (5).jpeg',
-            whatsappMsg: 'I would like to order Premium Wedding Bouquet (45,000 RWF)'
+            tag: 'SIGNATURE',
+            message: 'I would like to order Bridal Couture (95,000 RWF)'
         },
         {
-            name: 'Corporate Arrangement',
-            price: '30,000 RWF',
-            oldPrice: '50,000 RWF',
-            description: 'Professional flowers for offices & events',
+            name: 'Executive Suite',
+            price: '65,000',
+            oldPrice: '95,000',
+            description: 'Sophisticated arrangement designed for corporate environments. Makes a lasting impression.',
             image: 'images/flower/1 (7).jpeg',
-            whatsappMsg: 'I would like to order Corporate Arrangement (30,000 RWF)'
+            tag: 'CORPORATE',
+            message: 'I would like to order Executive Suite (65,000 RWF)'
         }
     ]
 };
+
+// === INITIALIZATION === 
+document.addEventListener('DOMContentLoaded', () => {
+    initCollection();
+    initSmoothScroll();
+    initMobileMenu();
+    initScrollEffects();
+    checkAnnouncementBar();
+    
+    console.log('🌸 Care Flowers initialized');
+});
+
+// === COLLECTION RENDERING ===
+function initCollection() {
+    const grid = document.getElementById('collectionGrid');
+    if (!grid) return;
+    
+    CONFIG.collection.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'collection-card';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        
+        card.innerHTML = `
+            <div class="collection-image">
+                <img src="${item.image}" 
+                     alt="${item.name}"
+                     loading="lazy"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22%3E%3Crect fill=%22%23F5F5F4%22 width=%22400%22 height=%22500%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22%2378716C%22 font-family=%22system-ui%22%3EImage Coming Soon%3C/text%3E%3C/svg%3E'">
+                <span class="collection-tag">${item.tag}</span>
+            </div>
+            <div class="collection-info">
+                <h3 class="collection-name">${item.name}</h3>
+                <p class="collection-description">${item.description}</p>
+                <div class="collection-price-row">
+                    <span class="collection-price">${item.price} RWF</span>
+                    ${item.oldPrice ? `<span class="collection-price-old">${item.oldPrice} RWF</span>` : ''}
+                </div>
+                <button class="btn-primary" onclick="orderItem(${index})">Order Now</button>
+            </div>
+        `;
+        
+        grid.appendChild(card);
+        
+        // Stagger animation
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+}
 
 // === WHATSAPP INTEGRATION ===
 function openWhatsApp(event, type = 'general') {
@@ -71,212 +123,173 @@ function openWhatsApp(event, type = 'general') {
     
     let message = CONFIG.whatsappMessage;
     
-    // Customize message based on type
     if (type === 'custom') {
-        message = 'Hello! I would like to request a custom bouquet arrangement. 🌸';
-    } else if (type === 'loyalty') {
-        message = 'Hello! I would like to book flowers and get my loyalty customer code. 🎁';
+        message = `Hello! I would like to request a custom floral design.
+
+Occasion:
+Preferred style:
+Color preferences:
+Budget:
+Delivery date:
+
+Please let me know what's possible. Thank you!`;
     }
     
-    // Generate WhatsApp URL
-    const whatsappURL = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
     
-    // Track conversion (if you add Google Analytics later)
-    trackConversion('whatsapp_click', type);
-    
-    // Open WhatsApp
-    window.open(whatsappURL, '_blank');
+    trackEvent('whatsapp_click', type);
 }
 
-// === GALLERY RENDERING ===
-function renderGallery() {
-    const galleryGrid = document.getElementById('galleryGrid');
-    
-    if (!galleryGrid) return;
-    
-    // Clear existing items
-    galleryGrid.innerHTML = '';
-    
-    // Render each gallery item
-    CONFIG.galleryItems.forEach((item, index) => {
-        const galleryItem = document.createElement('div');
-        galleryItem.className = 'gallery-item';
-        galleryItem.innerHTML = `
-            <img src="${item.image}" 
-                 alt="${item.name}" 
-                 class="gallery-img"
-                 loading="lazy"
-                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect fill=%22%23fce7f3%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22%23d4567a%22%3E🌸%3C/text%3E%3C/svg%3E'">
-            <div class="gallery-info">
-                <h3 class="gallery-name">${item.name}</h3>
-                <div class="gallery-price">
-                    ${item.price}
-                    ${item.oldPrice ? `<span class="gallery-price-old">${item.oldPrice}</span>` : ''}
-                </div>
-                <p class="gallery-desc">${item.description}</p>
-                <button class="btn-cta" onclick="orderItem(${index})">
-                    <span class="whatsapp-icon">📱</span> Order Now
-                </button>
-            </div>
-        `;
-        
-        galleryGrid.appendChild(galleryItem);
-    });
-}
-
-// === ORDER SPECIFIC ITEM ===
-function orderItem(itemIndex) {
-    const item = CONFIG.galleryItems[itemIndex];
+function orderItem(index) {
+    const item = CONFIG.collection[index];
     if (!item) return;
     
-    const message = item.whatsappMsg || `I would like to order ${item.name}`;
-    const whatsappURL = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(item.message)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
     
-    // Track conversion
-    trackConversion('order_click', item.name);
-    
-    // Open WhatsApp
-    window.open(whatsappURL, '_blank');
+    trackEvent('order_click', item.name);
 }
 
-// === CLOSE PROMO BANNER ===
-function closeBanner() {
-    const banner = document.getElementById('promoBanner');
-    if (banner) {
-        banner.style.display = 'none';
-        // Save to localStorage so it doesn't show again this session
-        try {
-            localStorage.setItem('promoBannerClosed', 'true');
-        } catch (e) {
-            // localStorage might be disabled
+// === ANNOUNCEMENT BAR ===
+function closeAnnouncement() {
+    const bar = document.getElementById('announcementBar');
+    if (!bar) return;
+    
+    bar.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    bar.style.transform = 'translateY(-100%)';
+    bar.style.opacity = '0';
+    
+    setTimeout(() => bar.remove(), 300);
+    
+    try {
+        sessionStorage.setItem('announcementClosed', 'true');
+    } catch (e) {}
+}
+
+function checkAnnouncementBar() {
+    try {
+        if (sessionStorage.getItem('announcementClosed') === 'true') {
+            const bar = document.getElementById('announcementBar');
+            if (bar) bar.remove();
         }
-    }
+    } catch (e) {}
 }
 
-// === CONVERSION TRACKING (for future analytics) ===
-function trackConversion(eventName, eventLabel) {
-    // Log to console for now
-    console.log(`Conversion Event: ${eventName} - ${eventLabel}`);
+// === MOBILE MENU ===
+function initMobileMenu() {
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
     
-    // If you add Google Analytics later, uncomment:
-    // if (typeof gtag !== 'undefined') {
-    //     gtag('event', eventName, {
-    //         'event_category': 'Engagement',
-    //         'event_label': eventLabel
-    //     });
-    // }
+    if (!toggle || !nav) return;
     
-    // If you add Facebook Pixel later, uncomment:
-    // if (typeof fbq !== 'undefined') {
-    //     fbq('track', 'Lead', { content_name: eventLabel });
-    // }
+    toggle.addEventListener('click', () => {
+        const isOpen = nav.style.display === 'flex';
+        nav.style.display = isOpen ? 'none' : 'flex';
+        toggle.classList.toggle('active');
+    });
 }
 
-// === SMOOTH SCROLL FOR ANCHOR LINKS ===
+// === SMOOTH SCROLL ===
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function(e) {
+            if (this.onclick) return;
+            
             const href = this.getAttribute('href');
-            
-            // Skip if it's the WhatsApp link handler
-            if (this.classList.contains('btn-cta') || 
-                this.classList.contains('whatsapp-float') ||
-                this.classList.contains('contact-link')) {
-                return;
-            }
-            
-            // Skip if href is just "#"
-            if (href === '#') {
-                return;
-            }
+            if (href === '#') return;
             
             e.preventDefault();
-            const target = document.querySelector(href);
             
-            if (target) {
-                const offset = 80; // Account for sticky header
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
+            const target = document.querySelector(href);
+            if (!target) return;
+            
+            const headerHeight = document.getElementById('header').offsetHeight;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
         });
     });
 }
 
-// === LAZY LOADING OPTIMIZATION ===
-function initLazyLoading() {
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                        observer.unobserve(img);
-                    }
-                }
-            });
-        });
+// === SCROLL EFFECTS ===
+function initScrollEffects() {
+    const header = document.getElementById('header');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
         
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-    }
-}
-
-// === CHECK PROMO BANNER STATUS ===
-function checkPromoBanner() {
-    try {
-        const bannerClosed = localStorage.getItem('promoBannerClosed');
-        const banner = document.getElementById('promoBanner');
-        
-        if (bannerClosed === 'true' && banner) {
-            banner.style.display = 'none';
+        // Header shadow on scroll
+        if (currentScroll > 50) {
+            header.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.boxShadow = 'none';
         }
-    } catch (e) {
-        // localStorage might be disabled
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    });
+    
+    // Observe elements
+    document.querySelectorAll('.testimonial-card, .guarantee-content').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(el);
+    });
+}
+
+// === ANALYTICS ===
+function trackEvent(eventName, eventLabel) {
+    console.log(`📊 Event: ${eventName} - ${eventLabel}`);
+    
+    // Google Analytics 4
+    if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, {
+            event_category: 'Engagement',
+            event_label: eventLabel
+        });
+    }
+    
+    // Facebook Pixel
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+            content_name: eventLabel
+        });
+    }
+    
+    // Vercel Analytics
+    if (typeof window.va !== 'undefined') {
+        window.va('track', eventName, { label: eventLabel });
     }
 }
 
-// === INITIALIZE ON PAGE LOAD ===
-document.addEventListener('DOMContentLoaded', function() {
-    // Render gallery
-    renderGallery();
-    
-    // Initialize smooth scrolling
-    initSmoothScroll();
-    
-    // Initialize lazy loading
-    initLazyLoading();
-    
-    // Check promo banner status
-    checkPromoBanner();
-    
-    // Log ready status
-    console.log('🌸 Care Flowers website loaded successfully!');
-    console.log('⚠️  Remember to update the WhatsApp number in main.js');
-});
-
-// === PERFORMANCE OPTIMIZATION ===
-// Debounce function for scroll events (if needed later)
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// === EXPORT FOR INLINE USE ===
-// These functions are called from HTML onclick attributes
+// === EXPORT FUNCTIONS ===
 window.openWhatsApp = openWhatsApp;
 window.orderItem = orderItem;
-window.closeBanner = closeBanner;
+window.closeAnnouncement = closeAnnouncement;
+
+// === ERROR HANDLING ===
+window.addEventListener('error', (e) => {
+    console.error('Error:', e.message);
+});
+
+window.addEventListener('unhandledrejection', (e) => {
+    console.error('Unhandled Promise:', e.reason);
+});

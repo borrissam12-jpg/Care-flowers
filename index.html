@@ -5,185 +5,339 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO Meta Tags -->
-    <title>Care Flowers | Fresh Bouquets & Event Flowers in Kigali, Rwanda 🌹</title>
-    <meta name="description" content="Premium fresh flowers in Kigali. Bouquets for birthdays, weddings, Valentine's Day & corporate events. Book online & save 30-50%. Same-day delivery available.">
-    <meta name="keywords" content="flowers Kigali, bouquet Kigali Rwanda, wedding flowers Kigali, Valentine flowers Rwanda, birthday flowers Kigali, flower delivery Kigali, florist Kigali,Indabo Kigali,indabo,rwanda">
+    <title>Care Flowers — Fresh Bouquets & Event Florals in Kigali</title>
+    <meta name="description" content="Premium artisanal florals in Kigali. Specializing in weddings, events, and daily deliveries. Ethically sourced, expertly arranged. Order online for same-day delivery.">
+    <meta name="keywords" content="flowers Kigali, luxury florist Rwanda, wedding flowers Kigali, artisan bouquets, indabo Rwanda, flower delivery Kigali">
     <meta name="author" content="Care Flowers">
     
-    <!-- Open Graph for Social Sharing -->
-    <meta property="og:title" content="Care Flowers - Premium Bouquets in Kigali">
-    <meta property="og:description" content="Book online & get 30-50% off. Fresh flowers for every occasion.">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Care Flowers — Premium Florals in Kigali">
+    <meta property="og:description" content="Artisanal bouquets crafted daily. Same-day delivery across Kigali.">
     <meta property="og:type" content="website">
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
-    <!-- Promo Banner -->
-    <div class="promo-banner" id="promoBanner">
-        <div class="container">
-            <span class="promo-text">🎉 Book Online & Get <strong>30-50% OFF</strong> - Limited Time!</span>
-            <button class="close-banner" onclick="closeBanner()">×</button>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" id="announcementBar">
+        <div class="container-fluid">
+            <p class="announcement-text">
+                Complimentary delivery on orders over 30,000 RWF
+                <span class="announcement-divider">·</span>
+                Order by 2PM for same-day delivery
+            </p>
+            <button class="announcement-close" onclick="closeAnnouncement()" aria-label="Close">×</button>
         </div>
     </div>
 
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <span class="logo-icon">🌸</span>
-                <span class="logo-text">Care Flowers</span>
+    <header class="header" id="header">
+        <div class="container-fluid">
+            <div class="header-inner">
+                <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <div class="logo">
+                    <h1>Care Flowers</h1>
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#collection" class="nav-link">Collection</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+                
+                <a href="#" class="btn-primary btn-header" onclick="openWhatsApp(event)">Order Now</a>
             </div>
-            <nav class="nav">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#gallery" class="nav-link">Gallery</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </nav>
-            <a href="#" class="btn-cta btn-cta-header" onclick="openWhatsApp(event)">Book Now</a>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Fresh Flowers Delivered<br>Across Kigali</h1>
-            <p class="hero-subtitle">Premium bouquets for birthdays, weddings, Valentine's & corporate events</p>
-            <div class="hero-cta">
-                <a href="#" class="btn-cta btn-cta-large" onclick="openWhatsApp(event)">
-                    <span class="whatsapp-icon">📱</span> Book on WhatsApp
-                </a>
-                <p class="hero-discount">✨ Get 30-50% OFF online bookings</p>
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-label">Artisanal Florals Since 2024</span>
+                <h2 class="hero-title">Every bloom tells<br>a story</h2>
+                <p class="hero-description">
+                    Premium bouquets crafted daily by master florists.<br>
+                    Sustainable sourcing. Same-day delivery across Kigali.
+                </p>
+                <div class="hero-actions">
+                    <a href="#collection" class="btn-primary btn-large">Explore Collection</a>
+                    <a href="#" class="btn-text" onclick="openWhatsApp(event)">
+                        Speak with a florist
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll to explore</span>
+            <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
+                <path d="M6 0V18M6 18L1 13M6 18L11 13" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Master Florists</span>
+                </div>
+                <div class="trust-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span>Same-Day Delivery</span>
+                </div>
+                <div class="trust-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Personal Service</span>
+                </div>
+                <div class="trust-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Sustainable Sourcing</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Features -->
-    <section class="features">
+    <!-- Collection Section -->
+    <section class="collection-section" id="collection">
         <div class="container">
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🚚</div>
-                    <h3>Same-Day Delivery</h3>
-                    <p>Order before 2 PM for same-day delivery in Kigali</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌹</div>
-                    <h3>Fresh & Premium</h3>
-                    <p>Hand-picked flowers, arranged by expert florists</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💝</div>
-                    <h3>Custom Bouquets</h3>
-                    <p>Personalized arrangements for every occasion</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="gallery-section" id="gallery">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Beautiful Collection</h2>
-                <p class="section-subtitle">Handcrafted with love for every special moment</p>
+            <div class="section-header-large">
+                <span class="section-label">Our Collection</span>
+                <h2 class="section-title-large">Artisanal arrangements<br>for every occasion</h2>
+                <p class="section-description">Each bouquet is hand-crafted to order using the freshest seasonal blooms. Delivered with care across Kigali.</p>
             </div>
             
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Gallery items will be dynamically inserted here -->
+            <div class="collection-grid" id="collectionGrid">
+                <!-- Dynamically populated -->
             </div>
 
-            <div class="gallery-cta">
-                <p class="gallery-cta-text">Can't find what you're looking for?</p>
-                <a href="#" class="btn-cta" onclick="openWhatsApp(event, 'custom')">Request Custom Bouquet</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Loyalty Program Teaser -->
-    <section class="loyalty-section">
-        <div class="container">
-            <div class="loyalty-card">
-                <div class="loyalty-icon">🎁</div>
-                <h2>Get Your Unique Customer Code</h2>
-                <p>Book now and receive a loyalty code for exclusive discounts on future orders</p>
-                <a href="#" class="btn-cta btn-cta-white" onclick="openWhatsApp(event, 'loyalty')">Book & Get My Code</a>
+            <div class="collection-footer">
+                <p class="collection-footer-text">Looking for something unique?</p>
+                <a href="#" class="btn-secondary" onclick="openWhatsApp(event, 'custom')">Request Custom Design</a>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials (Social Proof) -->
-    <section class="testimonials">
+    <!-- Guarantee Section -->
+    <section class="guarantee-section">
         <div class="container">
-            <h2 class="section-title">What Our Customers Say</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Beautiful flowers for my wife's birthday. Delivered on time!"</p>
-                    <strong>- Jean-Pierre, Kigali</strong>
+            <div class="guarantee-grid">
+                <div class="guarantee-image">
+                    <div class="guarantee-image-placeholder">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <path d="M30 5L35 20L50 25L35 30L30 45L25 30L10 25L25 20L30 5Z" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Professional service for our corporate event. Highly recommend!"</p>
-                    <strong>- Grace M., Event Planner</strong>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Fresh roses for Valentine's Day. My girlfriend loved them!"</p>
-                    <strong>- Patrick K., Kigali</strong>
+                <div class="guarantee-content">
+                    <span class="guarantee-label">Our Promise</span>
+                    <h3 class="guarantee-title">Freshness guaranteed,<br>always</h3>
+                    <p class="guarantee-description">Every arrangement is crafted the morning of delivery using flowers sourced within 48 hours. If you're not completely satisfied, we'll make it right—no questions asked.</p>
+                    <ul class="guarantee-list">
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.5 14.1667L3.33334 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>100% Freshness Guarantee</span>
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.5 14.1667L3.33334 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Hassle-Free Replacements</span>
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.5 14.1667L3.33334 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Delivered with Care Notes</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section" id="contact">
+    <!-- Testimonials -->
+    <section class="testimonials-section">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">📱</div>
-                    <h3>WhatsApp</h3>
-                    <a href="#" onclick="openWhatsApp(event)" class="contact-link">Chat with us</a>
+            <div class="section-header-centered">
+                <span class="section-label">Client Stories</span>
+                <h2 class="section-title-large">Trusted by Kigali's<br>finest hosts</h2>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                    </div>
+                    <p class="testimonial-text">"The attention to detail is extraordinary. Every arrangement feels personal and thoughtfully composed. They've become our go-to for all corporate events."</p>
+                    <div class="testimonial-author">
+                        <strong>Marie K.</strong>
+                        <span>Event Director, Kigali Serena</span>
+                    </div>
                 </div>
-                <div class="contact-card">
-                    <div class="contact-icon">📍</div>
-                    <h3>Location</h3>
-                    <p>Remera(Giporoso),Kigali, Rwanda</p>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                    </div>
+                    <p class="testimonial-text">"Transformed our wedding reception into something magical. The team understood our vision perfectly and exceeded every expectation. Worth every franc."</p>
+                    <div class="testimonial-author">
+                        <strong>Jean-Paul & Sarah</strong>
+                        <span>Wedding Clients, April 2024</span>
+                    </div>
                 </div>
-                <div class="contact-card">
-                    <div class="contact-icon">⏰</div>
-                    <h3>Hours</h3>
-                    <p>Mon-Sat: 8AM-8PM<br>Sun: 9AM-10PM</p>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
+                        </svg>
+                    </div>
+                    <p class="testimonial-text">"I order weekly for our reception desk. The arrangements stay fresh for days, and the quality is consistently excellent. Professional service every time."</p>
+                    <div class="testimonial-author">
+                        <strong>David M.</strong>
+                        <span>Office Manager, Kacyiru</span>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="about">
+        <div class="container">
+            <div class="cta-content">
+                <span class="cta-label">Start Your Order</span>
+                <h2 class="cta-title">Experience the difference<br>of artisanal florals</h2>
+                <p class="cta-description">Speak with our team to create something extraordinary.<br>Same-day delivery available across Kigali.</p>
+                <a href="#" class="btn-primary btn-large" onclick="openWhatsApp(event)">Order via WhatsApp</a>
+                <p class="cta-note">Response within 2 hours · Mon–Sat 8AM–8PM · Sun 9AM–10PM</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="contact">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
                 <div class="footer-brand">
-                    <span class="logo-icon">🌸</span>
-                    <span class="logo-text">Care Flowers</span>
+                    <h3>Care Flowers</h3>
+                    <p>Artisanal florals crafted daily in the heart of Kigali.</p>
                 </div>
-                <p class="footer-text">Fresh flowers for every special moment in Kigali</p>
-                <p class="footer-copyright">© 2026 Care Flowers. All rights reserved.</p>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#collection">Collection</a>
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Visit Us</h4>
+                    <p>Remera (Giporoso)<br>Kigali, Rwanda</p>
+                    <p class="footer-hours">Mon–Sat: 8AM–8PM<br>Sun: 9AM–10PM</p>
+                </div>
+                
+                <div class="footer-cta">
+                    <h4>Get in Touch</h4>
+                    <a href="#" class="btn-text" onclick="openWhatsApp(event)">
+                        Order via WhatsApp
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 Care Flowers. All rights reserved.</p>
+                <p>Crafted with care in Kigali</p>
             </div>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="#" class="whatsapp-float" onclick="openWhatsApp(event)" title="Chat on WhatsApp">
-        <svg viewBox="0 0 32 32" fill="white" width="28" height="28">
+    <!-- WhatsApp Float -->
+    <a href="#" class="whatsapp-float" onclick="openWhatsApp(event)" aria-label="Order via WhatsApp">
+        <svg viewBox="0 0 32 32" fill="white" width="24" height="24">
             <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.137-2.113c2.321 1.228 4.93 1.863 7.573 1.863 8.837 0 16-7.163 16-16s-7.163-16-15.71-16zM16 29.25c-2.444 0-4.822-0.672-6.913-1.944l-0.495-0.296-5.044 1.313 1.352-5.033-0.329-0.517c-1.396-2.217-2.133-4.773-2.133-7.398 0-7.734 6.297-14.031 14.031-14.031s14.031 6.297 14.031 14.031c0 7.732-6.297 14.031-14.031 14.031zM22.906 19.578c-0.401-0.201-2.366-1.168-2.732-1.302s-0.633-0.201-0.9 0.201c-0.268 0.402-1.036 1.302-1.27 1.569s-0.469 0.301-0.87 0.101c-0.401-0.201-1.691-0.623-3.219-1.984-1.189-1.059-1.992-2.367-2.226-2.768s-0.025-0.618 0.176-0.818c0.179-0.179 0.401-0.469 0.602-0.703s0.268-0.402 0.402-0.67c0.134-0.268 0.067-0.502-0.033-0.703s-0.9-2.165-1.233-2.965c-0.324-0.779-0.654-0.673-0.9-0.686-0.232-0.012-0.498-0.015-0.764-0.015s-0.697 0.099-1.063 0.502c-0.365 0.402-1.396 1.368-1.396 3.333s1.429 3.866 1.629 4.134c0.201 0.268 2.826 4.318 6.846 6.055 0.956 0.413 1.703 0.659 2.285 0.844 0.962 0.306 1.837 0.263 2.528 0.159 0.771-0.115 2.366-0.968 2.699-1.903s0.333-1.736 0.233-1.903c-0.1-0.168-0.368-0.268-0.769-0.469z"/>
         </svg>
     </a>
 
-    <script src="js/main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
