@@ -815,7 +815,6 @@
             <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.137-2.113c2.321 1.228 4.93 1.863 7.573 1.863 8.837 0 16-7.163 16-16s-7.163-16-15.71-16z"/>
         </svg>
     </a>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         const CONFIG = {
@@ -895,17 +894,15 @@
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-            
-            // 1. ADD TEXTURE LOADER HERE
             const textureLoader = new THREE.TextureLoader();
 
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setClearColor(0x000000, 0);
             
+            // Particles
             const geometry = new THREE.SphereGeometry(0.05, 8, 8);
             const particles = [];
             
-            // Existing Particle Loop
             for (let i = 0; i < 100; i++) {
                 const material = new THREE.MeshBasicMaterial({
                     color: i % 2 === 0 ? 0xD4AF37 : 0xFFB6C1,
@@ -926,64 +923,61 @@
                 particles.push({ mesh: particle, speed: Math.random() * 0.01 });
             }
 
-            // 2. ADD IMAGE PLANES SETUP HERE
+            // --- IMAGE PLANES START ---
             const imagePlanes = [];
             const images = [
-              'images\flower\1 (17).jpeg',
-              'images\flower\1 (17).jpeg',
-              'images\flower\1 (17).jpeg'
+              'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800',
+              'https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?w=800',
+              'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800'
             ];
 
             images.forEach((src, i) => {
               const texture = textureLoader.load(src);
-              texture.encoding = THREE.sRGBEncoding;
-
               const material = new THREE.MeshBasicMaterial({
                 map: texture,
                 transparent: true,
-                opacity: 0.85,
+                opacity: 0.9,
                 side: THREE.DoubleSide
               });
 
-              const geometry = new THREE.PlaneGeometry(1.5, 2);
+              const geometry = new THREE.PlaneGeometry(1.6, 2.2); // Slightly larger
               const plane = new THREE.Mesh(geometry, material);
 
+              // Space them out evenly (0, 120, 240 degrees)
               const angle = (i / images.length) * Math.PI * 2;
-              const radius = 3;
-
-              // Initial Position
-              plane.position.set(
-                Math.cos(angle) * radius,
-                Math.sin(angle) * 0.5,
-                Math.sin(angle) * radius
-              );
-
-              plane.rotation.y = angle;
+              
               scene.add(plane);
-
-              imagePlanes.push({ mesh: plane, angle });
+              
+              // Store angle in the object for animation
+              imagePlanes.push({ mesh: plane, angle: angle });
             });
+            // --- IMAGE PLANES END ---
             
             camera.position.z = 5;
             
             function animate() {
                 requestAnimationFrame(animate);
                 
-                // Existing Particle Animation
+                // 1. Rotate Particles
                 particles.forEach(p => {
                     p.mesh.rotation.y += p.speed;
                     p.mesh.rotation.x += p.speed * 0.5;
                 });
                 
-                scene.rotation.y += 0.002;
+                // 2. Rotate Image Planes (Orbit)
+                imagePlanes.forEach((p, i) => {
+                    // Increase the angle (Speed: 0.008)
+                    p.angle += 0.008; 
+                    
+                    // Update Position (Orbit radius: 3.5)
+                    p.mesh.position.x = Math.cos(p.angle) * 3.5;
+                    p.mesh.position.z = Math.sin(p.angle) * 3.5;
+                    
+                    // Add a slight floating bob effect
+                    p.mesh.position.y = Math.sin(Date.now() * 0.001 + i) * 0.2;
 
-                // 3. ADD IMAGE PLANES ANIMATION HERE
-                imagePlanes.forEach(p => {
-                  p.angle += 0.002;
-                  p.mesh.position.x = Math.cos(p.angle) * 3;
-                  p.mesh.position.z = Math.sin(p.angle) * 3;
-                  // This rotation keeps the image facing inward/camera relative to rotation
-                  p.mesh.rotation.y = -p.angle; 
+                    // Ensure the image always looks at the camera so it's not flat
+                    p.mesh.lookAt(camera.position);
                 });
                 
                 renderer.render(scene, camera);
