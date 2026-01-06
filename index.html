@@ -3,362 +3,1004 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Flowers — Artisanal Florals in Kigali</title>
+    <meta name="description" content="Premium artisanal florals in Kigali. Wedding florals, events, daily deliveries. Ethically sourced, masterfully arranged.">
     
-    <!-- SEO Meta Tags -->
-    <title>Care Flowers — Fresh Bouquets & Event Florals in Kigali</title>
-    <meta name="description" content="Premium artisanal florals in Kigali. Specializing in weddings, events, and daily deliveries. Ethically sourced, expertly arranged. Order online for same-day delivery.">
-    <meta name="keywords" content="flowers Kigali, luxury florist Rwanda, wedding flowers Kigali, artisan bouquets, indabo Rwanda, flower delivery Kigali">
-    <meta name="author" content="Care Flowers">
-    
-    <!-- Rwanda Geo Targeting -->
-    <meta name="geo.region" content="RW">
-    <meta name="geo.placename" content="Kigali">
-    <meta name="geo.position" content="-1.9441;30.0619">
-    <meta name="ICBM" content="-1.9441, 30.0619">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Care Flowers — Premium Florals in Kigali">
-    <meta property="og:description" content="Artisanal bouquets crafted daily. Same-day delivery across Kigali.">
-    <meta property="og:type" content="website">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg: #0A0A0A;
+            --text: #FAFAFA;
+            --text-dim: #A0A0A0;
+            --accent: #D4AF37;
+            --accent-dim: #8B7355;
+            --surface: #1A1A1A;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* PETAL ANIMATION */
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(255, 192, 203, 0.2));
+            border-radius: 50% 0 50% 0;
+            animation: fall linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* HEADER */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.9) 0%, transparent 100%);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            background: linear-gradient(135deg, var(--accent), #FFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav a:hover {
+            color: var(--accent);
+        }
+        
+        .nav a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+            color: var(--bg);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.4);
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(10, 10, 10, 0.7) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+        
+        .hero-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #FFF 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-dim);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+        
+        .btn-primary {
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+            color: var(--bg);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-secondary {
+            padding: 1.2rem 3rem;
+            background: transparent;
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+        
+        /* 3D CANVAS */
+        #bouquet3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        /* STORY SECTION */
+        .story-section {
+            padding: 10rem 5%;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+            position: relative;
+        }
+        
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        
+        .story-content {
+            position: relative;
+        }
+        
+        .story-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .story-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #FFF, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+        
+        .story-image {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .story-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.4) 100%);
+            z-index: 1;
+        }
+        
+        /* LOOKBOOK SECTION */
+        .lookbook-section {
+            padding: 10rem 5%;
+            background: var(--surface);
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 6rem;
+        }
+        
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+        
+        .lookbook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .lookbook-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .lookbook-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        .lookbook-image {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+        }
+        
+        .lookbook-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .lookbook-card:hover .lookbook-image img {
+            transform: scale(1.1);
+        }
+        
+        .lookbook-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(212, 175, 55, 0.9);
+            backdrop-filter: blur(10px);
+            color: var(--bg);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+        
+        .lookbook-info {
+            padding: 2rem;
+        }
+        
+        .lookbook-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+        
+        .lookbook-desc {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lookbook-price-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lookbook-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .lookbook-price-old {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            text-decoration: line-through;
+        }
+        
+        .lookbook-card .btn-primary {
+            width: 100%;
+            padding: 1rem;
+        }
+        
+        /* PARALLAX SECTION */
+        .parallax-section {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 5rem 0;
+        }
+        
+        .parallax-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"%3E%3Crect fill="%231A1A1A" width="800" height="600"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="40" fill="%23333" font-family="Playfair Display"%3EYour Floral Image%3C/text%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.3);
+        }
+        
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            padding: 0 2rem;
+        }
+        
+        .parallax-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 600;
+            line-height: 1.3;
+            font-style: italic;
+            color: var(--text);
+            margin-bottom: 2rem;
+        }
+        
+        .parallax-author {
+            font-size: 1rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: var(--bg);
+            padding: 5rem 5% 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+        }
+        
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), #FFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .footer-brand p {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+        
+        .footer-section h4 {
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .footer-section a, .footer-section p {
+            display: block;
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        /* WHATSAPP FLOAT */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .lookbook-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Floating Petals -->
+    <div class="petals-container" id="petalsContainer"></div>
     
-    <!-- Announcement Bar -->
-    <div class="announcement-bar" id="announcementBar">
-        <div class="container-fluid">
-            <p class="announcement-text">
-                Complimentary delivery on orders over 30,000 RWF
-                <span class="announcement-divider">·</span>
-                Order by 2PM for same-day delivery
-            </p>
-            <button class="announcement-close" onclick="closeAnnouncement()" aria-label="Close">×</button>
-        </div>
-    </div>
-
     <!-- Header -->
     <header class="header" id="header">
-        <div class="container-fluid">
-            <div class="header-inner">
-                <button class="menu-toggle" id="menuToggle" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                
-                <div class="logo">
-                    <h1>Care Flowers</h1>
-                </div>
-                
-                <nav class="nav" id="nav">
-                    <a href="#home" class="nav-link">Home</a>
-                    <a href="#collection" class="nav-link">Collection</a>
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#contact" class="nav-link">Contact</a>
-                </nav>
-                
-                <a href="#" class="btn-primary btn-header" onclick="openWhatsApp(event)">Order Now</a>
-            </div>
-        </div>
+        <div class="logo">CARE FLOWERS</div>
+        <nav class="nav">
+            <a href="#story">Story</a>
+            <a href="#collection">Collection</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <a href="#" class="cta-btn" onclick="openWhatsApp(event)">Order Now</a>
     </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-background"></div>
-        <div class="container">
-            <div class="hero-content">
-                <span class="hero-label">Artisanal Florals Since 2019</span>
-                <h2 class="hero-title">Every bloom tells<br>a story</h2>
-                <p class="hero-description">
-                    Premium bouquets crafted daily by master florists.<br>
-                    Sustainable sourcing. Same-day delivery across Kigali.
-                </p>
-                <div class="hero-actions">
-                    <a href="#collection" class="btn-primary btn-large">Explore Collection</a>
-                    <a href="#" class="btn-text" onclick="openWhatsApp(event)">
-                        Speak with a florist
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-holding-a-bouquet-of-flowers-47765-large.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <canvas id="bouquet3d"></canvas>
+        
+        <div class="hero-content">
+            <div class="hero-label">Artisanal Florals Since 2019</div>
+            <h1 class="hero-title display">Every bloom<br>tells a story</h1>
+            <p class="hero-subtitle">Premium bouquets crafted daily by master florists.<br>Sustainable sourcing. Same-day delivery across Kigali.</p>
+            <div class="hero-actions">
+                <a href="#collection" class="btn-primary">Explore Collection</a>
+                <a href="#" class="btn-secondary" onclick="openWhatsApp(event)">Speak with Florist</a>
             </div>
         </div>
-        <div class="hero-scroll">
-            <span>Scroll to explore</span>
-            <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
-                <path d="M6 0V18M6 18L1 13M6 18L11 13" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
+        
+        <div class="scroll-indicator">
+            <span>Discover</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
-
-    <!-- Trust Bar -->
-    <section class="trust-bar">
-        <div class="container">
-            <div class="trust-grid">
-                <div class="trust-item">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>Master Florists</span>
-                </div>
-                <div class="trust-item">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/>
-                        <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    <span>Same-Day Delivery</span>
-                </div>
-                <div class="trust-item">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>Personal Service</span>
-                </div>
-                <div class="trust-item">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>Sustainable Sourcing</span>
-                </div>
+    
+    <!-- Story Section -->
+    <section class="story-section" id="story">
+        <div class="story-grid">
+            <div class="story-content">
+                <div class="story-label">Our Craftsmanship</div>
+                <h2 class="story-title display">Where artistry<br>meets nature</h2>
+                <p class="story-text">Since 2019, we've been crafting moments of beauty in the heart of Kigali. Each arrangement begins before dawn, when our florists hand-select the finest blooms from sustainable local growers.</p>
+                <p class="story-text">We believe flowers are more than decoration—they're an emotional language. Whether celebrating love, mourning loss, or simply bringing joy to an ordinary day, our arrangements speak from the heart.</p>
+                <p class="story-text">Every stem is placed with intention. Every color chosen with purpose. Every bouquet tells your unique story.</p>
+            </div>
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1487070183336-b863922373d4?w=800" alt="Florist crafting arrangement" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22%3E%3Crect fill=%22%231A1A1A%22 width=%22400%22 height=%22500%22/%3E%3C/svg%3E'">
             </div>
         </div>
     </section>
-
-    <!-- Delivery Areas -->
-    <section class="delivery-section">
-        <div class="container">
-            <h3>Delivery Across Kigali</h3>
-            <p>
-                Same-day delivery available in:
-                <strong>Remera, Kacyiru, Kimihurura, Nyarutarama, Gikondo, Nyamirambo</strong>.
-            </p>
-            <p class="delivery-note">
-                Orders confirmed before 2PM qualify for same-day delivery.
-            </p>
+    
+    <!-- Parallax Quote -->
+    <section class="parallax-section">
+        <div class="parallax-bg"></div>
+        <div class="parallax-content">
+            <p class="parallax-quote display">"In every petal lies a universe of possibility"</p>
+            <p class="parallax-author">— Master Florist, Care Flowers</p>
         </div>
     </section>
-
-    <!-- Collection Section -->
-    <section class="collection-section" id="collection">
-        <div class="container">
-            <div class="section-header-large">
-                <span class="section-label">Our Collection</span>
-                <h2 class="section-title-large">Artisanal arrangements<br>for every occasion</h2>
-                <p class="section-description">Each bouquet is hand-crafted to order using the freshest seasonal blooms. Delivered with care across Kigali.</p>
-            </div>
-            
-            <div class="collection-grid" id="collectionGrid">
-                <!-- Dynamically populated -->
-            </div>
-
-            <div class="collection-footer">
-                <p class="collection-footer-text">Looking for something unique?</p>
-                <a href="#" class="btn-secondary" onclick="openWhatsApp(event, 'custom')">Request Custom Design</a>
-            </div>
+    
+    <!-- Lookbook Collection -->
+    <section class="lookbook-section" id="collection">
+        <div class="section-header">
+            <div class="section-label">The Collection</div>
+            <h2 class="section-title display">Curated arrangements<br>for your moment</h2>
+            <p class="section-subtitle">Each piece is a wearable work of art, crafted to order using the season's most exquisite blooms.</p>
+        </div>
+        
+        <div class="lookbook-grid" id="lookbookGrid">
+            <!-- Populated by JS -->
         </div>
     </section>
-
-    <!-- Guarantee Section -->
-    <section class="guarantee-section">
-        <div class="container">
-            <div class="guarantee-grid">
-                <div class="guarantee-image">
-                    <div class="guarantee-image-placeholder">
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <path d="M30 5L35 20L50 25L35 30L30 45L25 30L10 25L25 20L30 5Z" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="guarantee-content">
-                    <span class="guarantee-label">Our Promise</span>
-                    <h3 class="guarantee-title">Freshness guaranteed,<br>always</h3>
-                    <p class="guarantee-description">Every arrangement is crafted the morning of delivery using flowers sourced within 48 hours. If you're not completely satisfied, we'll make it right—no questions asked.</p>
-                    <ul class="guarantee-list">
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M16.6667 5L7.5 14.1667L3.33334 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span>100% Freshness Guarantee</span>
-                        </li>
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M16.6667 5L7.5 14.1667L3.33334 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span>Hassle-Free Replacements</span>
-                        </li>
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M16.6667 5L7.5 14.1667L3.33334 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span>Delivered with Care Notes</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials-section">
-        <div class="container">
-            <div class="section-header-centered">
-                <span class="section-label">Client Stories</span>
-                <h2 class="section-title-large">Trusted by Kigali's<br>finest hosts</h2>
-            </div>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-stars">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"The attention to detail is extraordinary. Every arrangement feels personal and thoughtfully composed. They've become our go-to for all corporate events."</p>
-                    <div class="testimonial-author">
-                        <strong>Marie K.</strong>
-                        <span>Event Director, Kigali Serena</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-stars">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"Transformed our wedding reception into something magical. The team understood our vision perfectly and exceeded every expectation. Worth every franc."</p>
-                    <div class="testimonial-author">
-                        <strong>Jean-Paul & Sarah</strong>
-                        <span>Wedding Clients, April 2024</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-stars">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"I order weekly for our reception desk. The arrangements stay fresh for days, and the quality is consistently excellent. Professional service every time."</p>
-                    <div class="testimonial-author">
-                        <strong>David M.</strong>
-                        <span>Office Manager, Kacyiru</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section" id="about">
-        <div class="container">
-            <div class="cta-content">
-                <span class="cta-label">Start Your Order</span>
-                <h2 class="cta-title">Experience the difference<br>of artisanal florals</h2>
-                <p class="cta-description">Speak with our team to create something extraordinary.<br>Same-day delivery available across Kigali.</p>
-                <a href="#" class="btn-primary btn-large" onclick="openWhatsApp(event)">Order via WhatsApp</a>
-                <p class="cta-note">Response within 2 hours · Mon–Sat 8AM–8PM · Sun 9AM–10PM</p>
-                <span class="live-proof">🌸 47 orders placed this week</span>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Footer -->
     <footer class="footer" id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>Care Flowers</h3>
-                    <p>Artisanal florals crafted daily in the heart of Kigali.</p>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <a href="#collection">Collection</a>
-                    <a href="#about">About Us</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4>Visit Us</h4>
-                    <p>Remera (Giporoso)<br>Kigali, Rwanda</p>
-                    <p class="footer-hours">Mon–Sat: 8AM–8PM<br>Sun: 9AM–10PM</p>
-                </div>
-                
-                <div class="footer-cta">
-                    <h4>Get in Touch</h4>
-                    <a href="#" class="btn-text" onclick="openWhatsApp(event)">
-                        Order via WhatsApp
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Care Flowers</h3>
+                <p>Artisanal florals crafted daily in the heart of Kigali. Sustainable sourcing, masterful design, delivered with care.</p>
             </div>
-            
-            <div class="footer-bottom">
-                <p>© 2026 Care Flowers. All rights reserved.</p>
-                <p>Crafted with care in Kigali</p>
+            <div class="footer-section">
+                <h4>Visit</h4>
+                <p>Remera (Giporoso)<br>Kigali, Rwanda</p>
+                <p>Mon–Sat: 8AM–8PM<br>Sun: 9AM–10PM</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#story">Our Story</a>
+                <a href="#collection">Collection</a>
+                <a href="#" onclick="openWhatsApp(event)">Custom Orders</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="#" onclick="openWhatsApp(event)">WhatsApp</a>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
             </div>
         </div>
+        <div class="footer-bottom">
+            <p>© 2026 Care Flowers. Crafted with care in Kigali.</p>
+        </div>
     </footer>
-
+    
     <!-- WhatsApp Float -->
-    <a href="#" class="whatsapp-float" onclick="openWhatsApp(event)" aria-label="Order via WhatsApp">
-        <svg viewBox="0 0 32 32" fill="white" width="24" height="24">
-            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.137-2.113c2.321 1.228 4.93 1.863 7.573 1.863 8.837 0 16-7.163 16-16s-7.163-16-15.71-16zM16 29.25c-2.444 0-4.822-0.672-6.913-1.944l-0.495-0.296-5.044 1.313 1.352-5.033-0.329-0.517c-1.396-2.217-2.133-4.773-2.133-7.398 0-7.734 6.297-14.031 14.031-14.031s14.031 6.297 14.031 14.031c0 7.732-6.297 14.031-14.031 14.031zM22.906 19.578c-0.401-0.201-2.366-1.168-2.732-1.302s-0.633-0.201-0.9 0.201c-0.268 0.402-1.036 1.302-1.27 1.569s-0.469 0.301-0.87 0.101c-0.401-0.201-1.691-0.623-3.219-1.984-1.189-1.059-1.992-2.367-2.226-2.768s-0.025-0.618 0.176-0.818c0.179-0.179 0.401-0.469 0.602-0.703s0.268-0.402 0.402-0.67c0.134-0.268 0.067-0.502-0.033-0.703s-0.9-2.165-1.233-2.965c-0.324-0.779-0.654-0.673-0.9-0.686-0.232-0.012-0.498-0.015-0.764-0.015s-0.697 0.099-1.063 0.502c-0.365 0.402-1.396 1.368-1.396 3.333s1.429 3.866 1.629 4.134c0.201 0.268 2.826 4.318 6.846 6.055 0.956 0.413 1.703 0.659 2.285 0.844 0.962 0.306 1.837 0.263 2.528 0.159 0.771-0.115 2.366-0.968 2.699-1.903s0.333-1.736 0.233-1.903c-0.1-0.168-0.368-0.268-0.769-0.469z"/>
+    <a href="#" class="whatsapp-float" onclick="openWhatsApp(event)">
+        <svg viewBox="0 0 32 32" fill="white" width="28" height="28">
+            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.137-2.113c2.321 1.228 4.93 1.863 7.573 1.863 8.837 0 16-7.163 16-16s-7.163-16-15.71-16zM16 29.25c-2.444 0-4.822-0.672-6.913-1.944l-0.495-0.296-5.044 1.313 1.352-5.033-0.329-0.517c-1.396-2.217-2.133-4.773-2.133-7.398 0-7.734 6.297-14.031 14.031-14.031s14.031 6.297 14.031 14.031c0 7.732-6.297 14.031-14.031 14.031z"/>
         </svg>
     </a>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const CONFIG = {
+            whatsappNumber: '250785137381',
+            collection: [
+                {
+                    name: 'Classic Rose Collection',
+                    price: '17,000',
+                    oldPrice: '25,000',
+                    description: 'Hand-selected premium roses arranged in our signature style. Perfect for expressing love.',
+                    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600',
+                    badge: '32% OFF'
+                },
+                {
+                    name: 'Spring Garden',
+                    price: '25,000',
+                    oldPrice: '35,000',
+                    description: 'A vibrant celebration of seasonal blooms featuring tulips, peonies, and garden roses.',
+                    image: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=600',
+                    badge: '29% OFF'
+                },
+                {
+                    name: 'Elegant Lily',
+                    price: '25,000',
+                    oldPrice: '30,000',
+                    description: 'Pure white lilies with eucalyptus and delicate greenery. Timeless sophistication.',
+                    image: 'https://images.unsplash.com/photo-1594969534759-9e4bbae03d79?w=600',
+                    badge: 'BESTSELLER'
+                },
+                {
+                    name: 'Sunlit Meadow',
+                    price: '15,000',
+                    oldPrice: '25,000',
+                    description: 'Cheerful sunflowers paired with wildflowers. Brings warmth to any space.',
+                    image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600',
+                    badge: '40% OFF'
+                },
+                {
+                    name: 'Bridal Couture',
+                    price: '15,000',
+                    oldPrice: '25,000',
+                    description: 'Our most luxurious arrangement. Orchids, peonies, and premium roses.',
+                    image: 'https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?w=600',
+                    badge: 'SIGNATURE'
+                },
+                {
+                    name: 'Executive Suite',
+                    price: '10,000',
+                    oldPrice: '25,000',
+                    description: 'Sophisticated arrangement for corporate environments. Makes a lasting impression.',
+                    image: 'https://images.unsplash.com/photo-1487070183336-b863922373d4?w=600',
+                    badge: '60% OFF'
+                }
+            ]
+        };
+        
+        // Floating Petals
+        function createPetals() {
+            const container = document.getElementById('petalsContainer');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.style.left = Math.random() * 100 + '%';
+                    petal.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                    petal.style.animationDelay = Math.random() * 5 + 's';
+                    container.appendChild(petal);
+                }, i * 200);
+            }
+        }
+        
+        // 3D Bouquet (Simple particles)
+        function init3D() {
+            const canvas = document.getElementById('bouquet3d');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            
+            const geometry = new THREE.SphereGeometry(0.05, 8, 8);
+            const particles = [];
+            
+            for (let i = 0; i < 100; i++) {
+                const material = new THREE.MeshBasicMaterial({
+                    color: i % 2 === 0 ? 0xD4AF37 : 0xFFB6C1,
+                    transparent: true,
+                    opacity: 0.6
+                });
+                const particle = new THREE.Mesh(geometry, material);
+                
+                const radius = 2;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.random() * Math.PI;
+                
+                particle.position.x = radius * Math.sin(phi) * Math.cos(theta);
+                particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
+                particle.position.z = radius * Math.cos(phi);
+                
+                scene.add(particle);
+                particles.push({ mesh: particle, speed: Math.random() * 0.01 });
+            }
+            
+            camera.position.z = 5;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                particles.forEach(p => {
+                    p.mesh.rotation.y += p.speed;
+                    p.mesh.rotation.x += p.speed * 0.5;
+                });
+                
+                scene.rotation.y += 0.002;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        
+        // Populate Collection
+        function initCollection() {
+            const grid = document.getElementById('lookbookGrid');
+            CONFIG.collection.forEach((item, i) => {
+                const card = document.createElement('div');
+                card.className = 'lookbook-card';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                
+                card.innerHTML = `
+                    <div class="lookbook-image">
+                        <img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22%3E%3Crect fill=%22%231A1A1A%22 width=%22400%22 height=%22500%22/%3E%3C/svg%3E'">
+                        <div class="lookbook-badge">${item.badge}</div>
+                    </div>
+                    <div class="lookbook-info">
+                        <h3 class="lookbook-name display">${item.name}</h3>
+                        <p class="lookbook-desc">${item.description}</p>
+                        <div class="lookbook-price-row">
+                            <span class="lookbook-price">${item.price} RWF</span>
+                            ${item.oldPrice ? `<span class="lookbook-price-old">${item.oldPrice} RWF</span>` : ''}
+                        </div>
+                        <button class="btn-primary" onclick="orderItem(${i})">Order Now</button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, i * 150);
+            });
+        }
+        
+        // WhatsApp
+        function openWhatsApp(e) {
+            e.preventDefault();
+            const msg = 'Hello Care Flowers! I would like to inquire about your artisanal floral arrangements.';
+            window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+        
+        function orderItem(i) {
+            const item = CONFIG.collection[i];
+            const msg = `Hello Care Flowers,
 
-    <script src="main.js"></script>
+I would like to order:
+━━━━━━━━━━━━━━━━
+• ${item.name}
+• Price: ${item.price} RWF
+━━━━━━━━━━━━━━━━
+
+Delivery Information:
+• Location: 
+• Preferred time: 
+• Recipient: 
+• Message card: 
+
+Thank you!`;
+            
+            window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+        
+        // Header scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Parallax
+        window.addEventListener('scroll', () => {
+            const parallax = document.querySelector('.parallax-bg');
+            if (parallax) {
+                const offset = window.pageYOffset;
+                parallax.style.transform = `translateY(${offset * 0.5}px)`;
+            }
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createPetals();
+            init3D();
+            initCollection();
+        });
+    </script>
 </body>
 </html>
