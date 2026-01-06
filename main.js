@@ -7,63 +7,73 @@ const CONFIG = {
     whatsappNumber: '250785137381',
     whatsappMessage: 'Hello! I would like to inquire about your artisanal floral arrangements.',
     
+    // Urgency messages (rotates per product)
+    urgencyMessages: [
+        'Only 3 left today',
+        'Limited availability',
+        'Popular this week',
+        'High demand',
+        'Few remaining'
+    ],
+    
     collection: [
         {
             name: 'Classic Rose Collection',
-            price: '35,000',
-            oldPrice: '50,000',
+            price: '17,000',
+            oldPrice: '25,000',
             description: 'Hand-selected premium roses arranged in our signature style. Perfect for expressing love and admiration.',
             image: 'images/flower/1 (1).jpeg',
-            tag: '30% OFF',
-            message: 'I would like to order the Classic Rose Collection (35,000 RWF)'
+            tag: '32% OFF'
         },
         {
             name: 'Spring Garden',
-            price: '42,000',
-            oldPrice: '65,000',
+            price: '25,000',
+            oldPrice: '35,000',
             description: 'A vibrant celebration of seasonal blooms featuring tulips, peonies, and garden roses.',
             image: 'images/flower/1 (3).jpeg',
-            tag: '35% OFF',
-            message: 'I would like to order Spring Garden (42,000 RWF)'
+            tag: '29% OFF'
         },
         {
             name: 'Elegant Lily',
-            price: '38,000',
-            oldPrice: '58,000',
+            price: '25,000',
+            oldPrice: '30,000',
             description: 'Pure white lilies arranged with eucalyptus and delicate greenery. Timeless sophistication.',
             image: 'images/flower/1 (14).jpeg',
-            tag: 'BESTSELLER',
-            message: 'I would like to order Elegant Lily (38,000 RWF)'
+            tag: 'BESTSELLER'
         },
         {
             name: 'Sunlit Meadow',
-            price: '28,000',
-            oldPrice: '42,000',
+            price: '15,000',
+            oldPrice: '25,000',
             description: 'Cheerful sunflowers paired with wildflowers. Brings warmth to any space.',
             image: 'images/flower/2 (8).jpeg',
-            tag: 'NEW',
-            message: 'I would like to order Sunlit Meadow (28,000 RWF)'
+            tag: '40% OFF'
         },
         {
             name: 'Bridal Couture',
-            price: '95,000',
-            oldPrice: '145,000',
+            price: '15,000',
+            oldPrice: '25,000',
             description: 'Our most luxurious arrangement. Orchids, peonies, and premium roses in an exquisite design.',
             image: 'images/flower/2 (5).jpeg',
-            tag: 'SIGNATURE',
-            message: 'I would like to order Bridal Couture (95,000 RWF)'
+            tag: 'SIGNATURE'
         },
         {
             name: 'Executive Suite',
-            price: '65,000',
-            oldPrice: '95,000',
+            price: '10,000',
+            oldPrice: '25,000',
             description: 'Sophisticated arrangement designed for corporate environments. Makes a lasting impression.',
             image: 'images/flower/1 (7).jpeg',
-            tag: 'CORPORATE',
-            message: 'I would like to order Executive Suite (65,000 RWF)'
+            tag: '60% OFF'
         }
     ]
 };
+
+// === LOYALTY CODE GENERATOR ===
+function generateLoyaltyCode() {
+    const prefix = 'CF';
+    const number = Math.floor(1000 + Math.random() * 9000);
+    return `${prefix}-${number}`;
+}
 
 // === INITIALIZATION === 
 document.addEventListener('DOMContentLoaded', () => {
@@ -75,13 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log('🌸 Care Flowers initialized');
 });
-
-// === LOYALTY CODE GENERATOR ===
-function generateLoyaltyCode() {
-    const prefix = 'CF';
-    const number = Math.floor(1000 + Math.random() * 9000);
-    return `${prefix}-${number}`;
-}
 
 // === COLLECTION RENDERING ===
 function initCollection() {
@@ -135,7 +138,9 @@ function openWhatsApp(event, type = 'general') {
     let message = CONFIG.whatsappMessage;
     
     if (type === 'custom') {
-        message = `Hello! I would like to request a custom floral design.
+        message = `Hello Care Flowers,
+
+I would like to request a custom floral design.
 
 Occasion:
 Preferred style:
@@ -152,12 +157,12 @@ Please let me know what's possible. Thank you!`;
     trackEvent('whatsapp_click', type);
 }
 
-// === ORDER ITEM WITH PRE-QUALIFICATION ===
+// === ORDER ITEM WITH PRE-QUALIFICATION & LOYALTY CODE ===
 function orderItem(index) {
     const item = CONFIG.collection[index];
     if (!item) return;
     
-    // Generate unique loyalty code for this customer
+    // Generate unique loyalty code
     const loyaltyCode = generateLoyaltyCode();
     
     // Structured WhatsApp message (pre-qualification)
