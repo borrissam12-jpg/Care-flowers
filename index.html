@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Care Flowers — Artisanal Florals in Kigali</title>
-    <meta name="description" content="Premium artisanal florals in Kigali. Wedding florals, events, daily deliveries. Ethically sourced, masterfully arranged.">
+    <meta name="description" content="Premium artisanal florals in Kigali. Wedding florals, events, daily deliveries.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +38,7 @@
             font-family: 'Playfair Display', serif;
         }
         
-        /* PETAL ANIMATION */
+        /* PETALS */
         .petals-container {
             position: fixed;
             top: 0;
@@ -281,7 +281,6 @@
             }
         }
         
-        /* SCROLL INDICATOR */
         .scroll-indicator {
             position: absolute;
             bottom: 3rem;
@@ -309,7 +308,6 @@
             background: linear-gradient(to bottom, var(--accent), transparent);
         }
         
-        /* 3D CANVAS */
         #bouquet3d {
             position: absolute;
             top: 0;
@@ -319,80 +317,7 @@
             z-index: 2;
         }
         
-        /* STORY SECTION */
-        .story-section {
-            padding: 10rem 5%;
-            background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
-            position: relative;
-        }
-        
-        .story-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            align-items: center;
-        }
-        
-        .story-content {
-            position: relative;
-        }
-        
-        .story-label {
-            font-size: 0.75rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-        }
-        
-        .story-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, #FFF, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .story-text {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            color: var(--text-dim);
-            margin-bottom: 1.5rem;
-        }
-        
-        .story-image {
-            position: relative;
-            aspect-ratio: 3/4;
-            overflow: hidden;
-            border-radius: 4px;
-        }
-        
-        .story-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .story-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        .story-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.4) 100%);
-            z-index: 1;
-        }
-        
-        /* LOOKBOOK SECTION */
+        /* LOOKBOOK */
         .lookbook-section {
             padding: 10rem 5%;
             background: var(--surface);
@@ -442,10 +367,11 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
         }
         
         .lookbook-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             border-color: rgba(212, 175, 55, 0.3);
         }
@@ -460,11 +386,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .lookbook-card:hover .lookbook-image img {
             transform: scale(1.1);
+            filter: brightness(1.1);
         }
         
         .lookbook-badge {
@@ -480,6 +407,48 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             z-index: 2;
+        }
+        
+        /* INTERACTIVE OVERLAY */
+        .lookbook-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.95) 70%);
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 3;
+        }
+        
+        .lookbook-card:hover .lookbook-overlay {
+            opacity: 1;
+        }
+        
+        .lookbook-quick-actions {
+            width: 100%;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .quick-btn {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quick-btn:hover {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
         }
         
         .lookbook-info {
@@ -525,48 +494,125 @@
             padding: 1rem;
         }
         
-        /* PARALLAX SECTION */
-        .parallax-section {
-            position: relative;
-            height: 70vh;
-            display: flex;
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            margin: 5rem 0;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
         }
         
-        .parallax-bg {
-            position: absolute;
-            inset: 0;
-            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"%3E%3Crect fill="%231A1A1A" width="800" height="600"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="40" fill="%23333" font-family="Playfair Display"%3EYour Floral Image%3C/text%3E%3C/svg%3E');
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.3);
+        .modal.active {
+            display: flex;
         }
         
-        .parallax-content {
+        .modal-content {
+            background: var(--surface);
+            max-width: 1000px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 8px;
             position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 700px;
-            padding: 0 2rem;
+            animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .parallax-quote {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 600;
-            line-height: 1.3;
-            font-style: italic;
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
             color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: var(--accent);
+            color: var(--bg);
+            transform: rotate(90deg);
+        }
+        
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 3rem;
+        }
+        
+        .modal-image {
+            position: relative;
+            aspect-ratio: 3/4;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .modal-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-price {
+            font-size: 2rem;
+            color: var(--accent);
+            font-weight: 700;
             margin-bottom: 2rem;
         }
         
-        .parallax-author {
-            font-size: 1rem;
+        .modal-desc {
+            font-size: 1.1rem;
+            line-height: 1.8;
             color: var(--text-dim);
-            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .modal-actions .btn-primary {
+            flex: 1;
         }
         
         /* FOOTER */
@@ -627,7 +673,6 @@
             font-size: 0.9rem;
         }
         
-        /* WHATSAPP FLOAT */
         .whatsapp-float {
             position: fixed;
             bottom: 2rem;
@@ -650,18 +695,16 @@
             box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
         }
         
-        /* RESPONSIVE */
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 3rem;
             }
             
-            .story-grid {
+            .lookbook-grid {
                 grid-template-columns: 1fr;
-                gap: 3rem;
             }
             
-            .lookbook-grid {
+            .modal-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -672,21 +715,17 @@
     </style>
 </head>
 <body>
-    <!-- Floating Petals -->
     <div class="petals-container" id="petalsContainer"></div>
     
-    <!-- Header -->
     <header class="header" id="header">
         <div class="logo">CARE FLOWERS</div>
         <nav class="nav">
-            <a href="#story">Story</a>
             <a href="#collection">Collection</a>
             <a href="#contact">Contact</a>
         </nav>
         <a href="#" class="cta-btn" onclick="openWhatsApp(event)">Order Now</a>
     </header>
     
-    <!-- Hero -->
     <section class="hero">
         <video class="hero-video" autoplay muted loop playsinline>
             <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-holding-a-bouquet-of-flowers-47765-large.mp4" type="video/mp4">
@@ -710,50 +749,47 @@
         </div>
     </section>
     
-    <!-- Story Section -->
-    <section class="story-section" id="story">
-        <div class="story-grid">
-            <div class="story-content">
-                <div class="story-label">Our Craftsmanship</div>
-                <h2 class="story-title display">Where artistry<br>meets nature</h2>
-                <p class="story-text">Since 2019, we've been crafting moments of beauty in the heart of Kigali. Each arrangement begins before dawn, when our florists hand-select the finest blooms from sustainable local growers.</p>
-                <p class="story-text">We believe flowers are more than decoration—they're an emotional language. Whether celebrating love, mourning loss, or simply bringing joy to an ordinary day, our arrangements speak from the heart.</p>
-                <p class="story-text">Every stem is placed with intention. Every color chosen with purpose. Every bouquet tells your unique story.</p>
-            </div>
-            <div class="story-image">
-                <img src="https://images.unsplash.com/photo-1487070183336-b863922373d4?w=800" alt="Florist crafting arrangement" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22%3E%3Crect fill=%22%231A1A1A%22 width=%22400%22 height=%22500%22/%3E%3C/svg%3E'">
-            </div>
-        </div>
-    </section>
-    
-    <!-- Parallax Quote -->
-    <section class="parallax-section">
-        <div class="parallax-bg"></div>
-        <div class="parallax-content">
-            <p class="parallax-quote display">"In every petal lies a universe of possibility"</p>
-            <p class="parallax-author">— Master Florist, Care Flowers</p>
-        </div>
-    </section>
-    
-    <!-- Lookbook Collection -->
     <section class="lookbook-section" id="collection">
         <div class="section-header">
             <div class="section-label">The Collection</div>
             <h2 class="section-title display">Curated arrangements<br>for your moment</h2>
-            <p class="section-subtitle">Each piece is a wearable work of art, crafted to order using the season's most exquisite blooms.</p>
+            <p class="section-subtitle">Each piece is crafted to order using the season's most exquisite blooms.</p>
         </div>
         
-        <div class="lookbook-grid" id="lookbookGrid">
-            <!-- Populated by JS -->
-        </div>
+        <div class="lookbook-grid" id="lookbookGrid"></div>
     </section>
     
-    <!-- Footer -->
+    <!-- QUICK VIEW MODAL -->
+    <div class="modal" id="quickViewModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modalName" class="display"></h2>
+                    <div class="modal-price" id="modalPrice"></div>
+                    <p class="modal-desc" id="modalDesc"></p>
+                    <ul class="modal-features">
+                        <li><span>Freshness</span><span>48 hours guaranteed</span></li>
+                        <li><span>Delivery</span><span>Same-day available</span></li>
+                        <li><span>Arrangement</span><span>Hand-crafted daily</span></li>
+                        <li><span>Care</span><span>Instructions included</span></li>
+                    </ul>
+                    <div class="modal-actions">
+                        <button class="btn-primary" onclick="orderFromModal()">Order Now via WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <footer class="footer" id="contact">
         <div class="footer-grid">
             <div class="footer-brand">
                 <h3>Care Flowers</h3>
-                <p>Artisanal florals crafted daily in the heart of Kigali. Sustainable sourcing, masterful design, delivered with care.</p>
+                <p>Artisanal florals crafted daily in the heart of Kigali.</p>
             </div>
             <div class="footer-section">
                 <h4>Visit</h4>
@@ -762,15 +798,12 @@
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
-                <a href="#story">Our Story</a>
                 <a href="#collection">Collection</a>
                 <a href="#" onclick="openWhatsApp(event)">Custom Orders</a>
             </div>
             <div class="footer-section">
                 <h4>Connect</h4>
                 <a href="#" onclick="openWhatsApp(event)">WhatsApp</a>
-                <a href="#">Instagram</a>
-                <a href="#">Facebook</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -778,10 +811,9 @@
         </div>
     </footer>
     
-    <!-- WhatsApp Float -->
     <a href="#" class="whatsapp-float" onclick="openWhatsApp(event)">
         <svg viewBox="0 0 32 32" fill="white" width="28" height="28">
-            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.137-2.113c2.321 1.228 4.93 1.863 7.573 1.863 8.837 0 16-7.163 16-16s-7.163-16-15.71-16zM16 29.25c-2.444 0-4.822-0.672-6.913-1.944l-0.495-0.296-5.044 1.313 1.352-5.033-0.329-0.517c-1.396-2.217-2.133-4.773-2.133-7.398 0-7.734 6.297-14.031 14.031-14.031s14.031 6.297 14.031 14.031c0 7.732-6.297 14.031-14.031 14.031z"/>
+            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.137-2.113c2.321 1.228 4.93 1.863 7.573 1.863 8.837 0 16-7.163 16-16s-7.163-16-15.71-16z"/>
         </svg>
     </a>
     
@@ -795,7 +827,7 @@
                     price: '17,000',
                     oldPrice: '25,000',
                     description: 'Hand-selected premium roses arranged in our signature style. Perfect for expressing love.',
-                    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600',
+                    image: 'images/flower/1 (5).jpeg',
                     badge: '32% OFF'
                 },
                 {
@@ -811,7 +843,7 @@
                     price: '25,000',
                     oldPrice: '30,000',
                     description: 'Pure white lilies with eucalyptus and delicate greenery. Timeless sophistication.',
-                    image: 'https://images.unsplash.com/photo-1594969534759-9e4bbae03d79?w=600',
+                    image: 'images/flower/1 (7).jpeg',
                     badge: 'BESTSELLER'
                 },
                 {
@@ -827,7 +859,7 @@
                     price: '15,000',
                     oldPrice: '25,000',
                     description: 'Our most luxurious arrangement. Orchids, peonies, and premium roses.',
-                    image: 'https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?w=600',
+                    image: 'images/flower/1 (9).jpeg',
                     badge: 'SIGNATURE'
                 },
                 {
@@ -835,13 +867,15 @@
                     price: '10,000',
                     oldPrice: '25,000',
                     description: 'Sophisticated arrangement for corporate environments. Makes a lasting impression.',
-                    image: 'https://images.unsplash.com/photo-1487070183336-b863922373d4?w=600',
+                    image: 'images/flower/1 (10).jpeg',
                     badge: '60% OFF'
                 }
             ]
         };
         
-        // Floating Petals
+        let currentItem = null;
+        
+        // Petals
         function createPetals() {
             const container = document.getElementById('petalsContainer');
             for (let i = 0; i < 20; i++) {
@@ -856,7 +890,7 @@
             }
         }
         
-        // 3D Bouquet (Simple particles)
+        // 3D Bouquet
         function init3D() {
             const canvas = document.getElementById('bouquet3d');
             const scene = new THREE.Scene();
@@ -913,7 +947,7 @@
             });
         }
         
-        // Populate Collection
+        // Collection with Interactive Features
         function initCollection() {
             const grid = document.getElementById('lookbookGrid');
             CONFIG.collection.forEach((item, i) => {
@@ -924,8 +958,14 @@
                 
                 card.innerHTML = `
                     <div class="lookbook-image">
-                        <img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22%3E%3Crect fill=%22%231A1A1A%22 width=%22400%22 height=%22500%22/%3E%3C/svg%3E'">
+                        <img src="${item.image}" alt="${item.name}" loading="lazy">
                         <div class="lookbook-badge">${item.badge}</div>
+                        <div class="lookbook-overlay">
+                            <div class="lookbook-quick-actions">
+                                <button class="quick-btn" onclick="quickView(${i})">Quick View</button>
+                                <button class="quick-btn" onclick="orderItem(${i})">Order Now</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="lookbook-info">
                         <h3 class="lookbook-name display">${item.name}</h3>
@@ -946,6 +986,44 @@
                     card.style.transform = 'translateY(0)';
                 }, i * 150);
             });
+        }
+        
+        // Quick View Modal
+        function quickView(i) {
+            currentItem = CONFIG.collection[i];
+            document.getElementById('modalImage').src = currentItem.image;
+            document.getElementById('modalName').textContent = currentItem.name;
+            document.getElementById('modalPrice').textContent = currentItem.price + ' RWF';
+            document.getElementById('modalDesc').textContent = currentItem.description;
+            document.getElementById('quickViewModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('quickViewModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function orderFromModal() {
+            if (currentItem) {
+                const msg = `Hello Care Flowers,
+
+I would like to order:
+━━━━━━━━━━━━━━━━
+• ${currentItem.name}
+• Price: ${currentItem.price} RWF
+━━━━━━━━━━━━━━━━
+
+Delivery Information:
+• Location: 
+• Preferred time: 
+• Recipient: 
+• Message card: 
+
+Thank you!`;
+                
+                window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+            }
         }
         
         // WhatsApp
@@ -986,12 +1064,10 @@ Thank you!`;
             }
         });
         
-        // Parallax
-        window.addEventListener('scroll', () => {
-            const parallax = document.querySelector('.parallax-bg');
-            if (parallax) {
-                const offset = window.pageYOffset;
-                parallax.style.transform = `translateY(${offset * 0.5}px)`;
+        // Close modal on outside click
+        document.getElementById('quickViewModal').addEventListener('click', (e) => {
+            if (e.target.id === 'quickViewModal') {
+                closeModal();
             }
         });
         
