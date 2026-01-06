@@ -759,7 +759,6 @@
         <div class="lookbook-grid" id="lookbookGrid"></div>
     </section>
     
-    <!-- QUICK VIEW MODAL -->
     <div class="modal" id="quickViewModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">×</button>
@@ -897,12 +896,16 @@
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
             
+            // 1. ADD TEXTURE LOADER HERE
+            const textureLoader = new THREE.TextureLoader();
+
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setClearColor(0x000000, 0);
             
             const geometry = new THREE.SphereGeometry(0.05, 8, 8);
             const particles = [];
             
+            // Existing Particle Loop
             for (let i = 0; i < 100; i++) {
                 const material = new THREE.MeshBasicMaterial({
                     color: i % 2 === 0 ? 0xD4AF37 : 0xFFB6C1,
@@ -922,18 +925,66 @@
                 scene.add(particle);
                 particles.push({ mesh: particle, speed: Math.random() * 0.01 });
             }
+
+            // 2. ADD IMAGE PLANES SETUP HERE
+            const imagePlanes = [];
+            const images = [
+              'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800',
+              'https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?w=800',
+              'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800'
+            ];
+
+            images.forEach((src, i) => {
+              const texture = textureLoader.load(src);
+              texture.encoding = THREE.sRGBEncoding;
+
+              const material = new THREE.MeshBasicMaterial({
+                map: texture,
+                transparent: true,
+                opacity: 0.85,
+                side: THREE.DoubleSide
+              });
+
+              const geometry = new THREE.PlaneGeometry(1.5, 2);
+              const plane = new THREE.Mesh(geometry, material);
+
+              const angle = (i / images.length) * Math.PI * 2;
+              const radius = 3;
+
+              // Initial Position
+              plane.position.set(
+                Math.cos(angle) * radius,
+                Math.sin(angle) * 0.5,
+                Math.sin(angle) * radius
+              );
+
+              plane.rotation.y = angle;
+              scene.add(plane);
+
+              imagePlanes.push({ mesh: plane, angle });
+            });
             
             camera.position.z = 5;
             
             function animate() {
                 requestAnimationFrame(animate);
                 
+                // Existing Particle Animation
                 particles.forEach(p => {
                     p.mesh.rotation.y += p.speed;
                     p.mesh.rotation.x += p.speed * 0.5;
                 });
                 
                 scene.rotation.y += 0.002;
+
+                // 3. ADD IMAGE PLANES ANIMATION HERE
+                imagePlanes.forEach(p => {
+                  p.angle += 0.002;
+                  p.mesh.position.x = Math.cos(p.angle) * 3;
+                  p.mesh.position.z = Math.sin(p.angle) * 3;
+                  // This rotation keeps the image facing inward/camera relative to rotation
+                  p.mesh.rotation.y = -p.angle; 
+                });
                 
                 renderer.render(scene, camera);
             }
